@@ -128,7 +128,6 @@ function Dashboard() {
       const server = await device.gatt.connect();
       const service = await server.getPrimaryService(SERVICE_UUID);
       const characteristic = await service.getCharacteristic(CHARACTERISTIC_UUID);
-
       await characteristic.startNotifications();
 
       characteristic.addEventListener(
@@ -183,6 +182,7 @@ function Dashboard() {
           {menuButton("location", "Location")}
           {menuButton("bluetooth", "Bluetooth")}
           {menuButton("alerts", "Alert Logs")}
+          {menuButton("emergency", "Emergency Contacts")}
         </nav>
       </aside>
 
@@ -386,6 +386,44 @@ function Dashboard() {
             </div>
           </div>
         )}
+        {activeSection === "emergency" && (
+  <div className="bg-white/10 border border-white/10 rounded-3xl p-6">
+    <h2 className="text-3xl font-bold mb-6 text-red-400">
+      Emergency Contacts
+    </h2>
+
+    <div className="grid gap-4 max-w-2xl">
+
+      <input
+        type="text"
+        placeholder="Driver Name"
+        className="bg-black/30 p-3 rounded-xl border border-white/10"
+      />
+
+      <input
+        type="text"
+        placeholder="Your Mobile Number"
+        className="bg-black/30 p-3 rounded-xl border border-white/10"
+      />
+
+      <button className="bg-red-500 hover:bg-red-600 p-3 rounded-xl font-bold">
+        Save Emergency Contacts
+      </button>
+    </div>
+
+    <div className="mt-8 bg-black/20 p-5 rounded-2xl">
+      <h3 className="text-xl font-bold mb-4">
+        Emergency Services
+      </h3>
+
+      <div className="space-y-3">
+        <p>🚔 Police : 112</p>
+        <p>🚑 Ambulance : 108</p>
+        <p>🔥 Fire Brigade : 101</p>
+      </div>
+    </div>
+  </div>
+)}
       </main>
     </div>
   );
